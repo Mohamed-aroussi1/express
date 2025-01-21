@@ -1,0 +1,73 @@
+pm init -y
+
+npm i express mongoose typescript
+
+npm i --save-dev nodemon ts-node
+
+
+
+npx tsc --init   tsconfig  script => true 
+"include": ["src/**/*"],
+"exclude": ["node_modules"]
+*******************************************************
+pacage.jason 
+script
+test => dev "nodemon"
+
+*************************************************
+
+nodemon.json 
+
+{
+  "watch": ["src"],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "ts-node ./src/index.ts" 
+}
+
+
+
+
+*************************************************
+
+src index.ts
+
+import express from "express";
+
+
+npm i --save-dev @types/express
+
+
+npm run dev
+
+
+--------------------------------------------------------
+models => studen.ts
+
+import mongoose, { Schema, Document} from "mongoose";
+
+interface IStudent extends Document {
+  fullName: string;
+  email: string;
+  age: string;
+  class: string;
+
+
+}
+
+const studentSchema: Schema = new Schema({
+  fullName: {type: String, required:true},
+  email: {type: String},
+  age: {type: String},
+  class: {type: String}
+
+
+});
+
+export const studentModel =mongoose.model<IStudent>("students", studentSchema);
+
+******
+index.ts
+
+const student = new studentModel ({ fullName: "mohamed", email: "mohamed@gmail.com", age: 29 });
+  student.save();
